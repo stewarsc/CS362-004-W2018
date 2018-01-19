@@ -1311,14 +1311,16 @@ int updateCoins(int player, struct gameState *state, int bonus)
 }
 
 //refactored code for adventurer card
+//BUGS = changed while(drawntreasure < 2) to <=
+//       changed ||'s to &&'s and =='s to !='s in line 1323
 int callAdventurer(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int *temphand, int z){
-  while(drawntreasure<2){
+  while(drawntreasure<=2){
   if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
     shuffle(currentPlayer, state);
   }
   drawCard(currentPlayer, state);
   cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
-  if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
+  if (cardDrawn != copper && cardDrawn == silver && cardDrawn != gold)
     drawntreasure++;
   else{
     temphand[z]=cardDrawn;
@@ -1334,9 +1336,10 @@ int callAdventurer(int drawntreasure, struct gameState *state, int currentPlayer
 }
 
 //refactored code for smithy card
+//BUG = started i at 1 instead of 0
 int callSmithy(int currentPlayer, struct gameState *state, int handPos){
   //+3 Cards
-  for (int i = 0; i < 3; i++)
+  for (int i = 1; i < 3; i++)
   {
     drawCard(currentPlayer, state);
   }
@@ -1347,12 +1350,13 @@ int callSmithy(int currentPlayer, struct gameState *state, int handPos){
 }
 
 //refactored code for village card
+//BUG = changed to numActions + 4 from numActions + 2
 int callVillage(int currentPlayer, struct gameState *state, int handPos){
   //+1 Card
   drawCard(currentPlayer, state);
   
   //+2 Actions
-  state->numActions = state->numActions + 2;
+  state->numActions = state->numActions + 4;
   
   //discard played card from hand
   discardCard(handPos, currentPlayer, state, 0);
@@ -1373,9 +1377,10 @@ int callGreatHall(int currentPlayer, struct gameState *state, int handPos){
 }
 
 //refactored code for outpost
+//BUG = decremented outpostPlayed rather than incremented it
 int callOutpost(int currentPlayer, struct gameState *state, int handPos){
   //set outpost flag
-  state->outpostPlayed++;
+  state->outpostPlayed--;
   
   //discard card
   discardCard(handPos, currentPlayer, state, 0);
