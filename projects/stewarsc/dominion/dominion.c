@@ -1339,7 +1339,8 @@ int callAdventurer(int drawntreasure, struct gameState *state, int currentPlayer
 //BUG = started i at 1 instead of 0
 int callSmithy(int currentPlayer, struct gameState *state, int handPos){
   //+3 Cards
-  for (int i = 1; i < 3; i++)
+  int i = 0;
+  for (i = 1; i < 3; i++)
   {
     drawCard(currentPlayer, state);
   }
