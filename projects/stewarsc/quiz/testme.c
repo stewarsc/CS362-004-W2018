@@ -1,3 +1,10 @@
+/* Scott Stewart Random Test Quiz submission
+ *
+ * Type "make" into command line to compile, then type "randQuiz" to run
+ *
+ * Program usually takes < 10000 iterations to find error, but has taken upwards of 70000.
+ */
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
