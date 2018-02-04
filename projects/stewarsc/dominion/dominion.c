@@ -105,10 +105,10 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
   //set number of Kingdom cards
   for (i = adventurer; i <= treasure_map; i++)       	//loop all cards
     {
-      for (j = 0; j < 10; j++)           		//loop chosen cards
-	{
-	  if (kingdomCards[j] == i)
-	    {
+    for (j = 0; j < 10; j++)           		//loop chosen cards
+	  {
+	   if (kingdomCards[j] == i)
+	   {
 	      //check if card is a 'Victory' Kingdom card
 	      if (kingdomCards[j] == great_hall || kingdomCards[j] == gardens)
 		{
@@ -1386,6 +1386,16 @@ int callOutpost(int currentPlayer, struct gameState *state, int handPos){
   //discard card
   discardCard(handPos, currentPlayer, state, 0);
   return 0;
+}
+
+//assert function for tests
+int assertTrue(char* name, int first, int second){
+  if(first == second){
+    printf("%s: %d is the same as %d. TEST PASSED!\n", name, first, second);
+  }
+  else
+    printf("%s: %d is NOT the same as %d. TEST FAILED!\n", name, first, second);
+  
 }
 //end of dominion.c
 
