@@ -31,19 +31,19 @@ runtests: testDrawCard
 
 randomtestadventurer: randomtestadventurer.c dominion.o rngs.o
 	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
-	randomtestadventurer >> randomtestadventurer.out
+	randomtestadventurer > randomtestadventurer.out
 	gcov -abcfu dominion.c | sed -n '/callAdventurer/{n;p; n;p; n;p; n;p}' >> randomtestadventurer.out
 	cat dominion.c.gcov >> randomtestadventurer.out
 
 randomtestcard1: randomtestcard1.c dominion.o rngs.o
 	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
-	randomtestcard1 >> randomtestcard1.out
+	randomtestcard1 > randomtestcard1.out
 	gcov -abcfu dominion.c | sed -n '/callSmithy/{n;p; n;p; n;p; n;p}' >> randomtestcard1.out
 	cat dominion.c.gcov >> randomtestcard1.out
 
 randomtestcard2: randomtestcard2.c dominion.o rngs.o
 	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
-	randomtestcard2 >> randomtestcard2.out
+	randomtestcard2 > randomtestcard2.out
 	gcov -abcfu dominion.c | sed -n '/callVillage/{n;p; n;p; n;p; n;p}' >> randomtestcard2.out
 	cat dominion.c.gcov >> randomtestcard2.out
 
