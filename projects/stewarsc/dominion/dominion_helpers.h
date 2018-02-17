@@ -16,5 +16,5 @@ int callSmithy(int currentPlayer, struct gameState *state, int handPos);
 int callVillage(int currentPlayer, struct gameState *state, int handPos);
 int callGreatHall(int currentPlayer, struct gameState *state, int handPos);
 int callOutpost(int currentPlayer, struct gameState *state, int handPos);
-int assertTrue(char* name, int first, int second);
+void printGameState(struct gameState *statek, int player);
 #endif

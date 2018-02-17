@@ -105,10 +105,10 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
   //set number of Kingdom cards
   for (i = adventurer; i <= treasure_map; i++)       	//loop all cards
     {
-    for (j = 0; j < 10; j++)           		//loop chosen cards
-	  {
-	   if (kingdomCards[j] == i)
-	   {
+      for (j = 0; j < 10; j++)           		//loop chosen cards
+	{
+	  if (kingdomCards[j] == i)
+	    {
 	      //check if card is a 'Victory' Kingdom card
 	      if (kingdomCards[j] == great_hall || kingdomCards[j] == gardens)
 		{
@@ -1314,24 +1314,28 @@ int updateCoins(int player, struct gameState *state, int bonus)
 //BUGS = changed while(drawntreasure < 2) to <=
 //       changed ||'s to &&'s and =='s to !='s in line 1323
 int callAdventurer(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int *temphand, int z){
+  
   while(drawntreasure<=2){
   if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
     shuffle(currentPlayer, state);
   }
   drawCard(currentPlayer, state);
   cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
-  if (cardDrawn != copper && cardDrawn == silver && cardDrawn != gold)
+  if (cardDrawn != copper && cardDrawn == silver && cardDrawn != gold){
     drawntreasure++;
+  }
   else{
     temphand[z]=cardDrawn;
     state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
     z++;
   }
       }
+
       while(z-1>=0){
   state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
   z=z-1;
       }
+
       return 0;
 }
 
@@ -1388,14 +1392,17 @@ int callOutpost(int currentPlayer, struct gameState *state, int handPos){
   return 0;
 }
 
-//assert function for tests
-int assertTrue(char* name, int first, int second){
-  if(first == second){
-    printf("%s: %d is the same as %d. TEST PASSED!\n", name, first, second);
-  }
-  else
-    printf("%s: %d is NOT the same as %d. TEST FAILED!\n", name, first, second);
-  
+//printing function to store value of bug
+void printGameState(struct gameState *state, int player){
+
+  printf("Game state of failed test:\n");
+  printf("handCount: %d\n", state->handCount[player]);
+  printf("deckCount: %d\n", state->deckCount[player]);
+  printf("discardCount: %d\n", state->discardCount[player]);
+  printf("playedCardCount: %d\n", state->playedCardCount);
+  printf("numBuys: %d\n", state->numBuys);
+  printf("numActions: %d\n", state->numActions);
+  printf("End of failed test game state.\n\n");
 }
 //end of dominion.c
 
