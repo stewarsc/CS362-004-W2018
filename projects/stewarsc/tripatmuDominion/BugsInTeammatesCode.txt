@@ -1,0 +1,89 @@
+//Bug # 1
+
+ID: Dominion-Adventurer-1-Too many cards added to hand
+
+Severity: Major
+
+Priority: Immediate
+
+Resolution: NOT-FIXED
+
+Status: OPEN
+
+Reproducibility: Every time
+
+Version: Dominion code from CS362 Class Repo (exact version not available)
+
+Description:  
+	When the adventurer card is played, the handCount of the game state increases by 1 instead of two. This happens
+	after running initializeGame with the following kingdom cards: smithy, adventurer, salvager, remodel, baron, 
+	great_hall, ambassador, tribute, outpost, minion, players set to 2, and seed set to 10. In card effect, the adventurer
+	card is played, with the three choice variables, handPos and bonus all set to 0. The previously initialized game state
+	is also passed to cardEffect. 
+
+	By playing the adventurer card, an extra card is added to the handCount. No error message pops up, and the game plays
+	on normally with the wrong values. This is a problem because the adventurer card is supposed to add two cards to your hand, 
+	not three. 
+
+	The cause of the bug probably has to do with a loop that is not counted correctly in the part of the code
+	where cards are drawn (look for <= instead of < or starting	at 1 instead of 0).
+
+Steps to reproduce:
+	Run initializeGame with the input values listed above, and run cardEffect with the values listed above. Check the handCount
+	of the current player by running a print statement, and it will be 1 more than it is supposed to be. The bug appears to be 
+	an error with counting the amount of cards added to the hand.
+
+Expected Result: 
+	handCount should be 7 (two cards added).
+
+Actual Result: 
+	handCount is 8 (1 extra card).
+
+Attachments:
+	See cardtest2, test #3 to reproduce the test and bug.
+
+__________________________________________________________________________________________________________________________________
+
+
+//Bug # 2
+
+ID: Dominion-Adventurer-2-Coin count not updated
+
+Severity: Major
+
+Priority: Immediate
+
+Resolution: NOT-FIXED
+
+Status: OPEN
+
+Reproducibility: Every time
+
+Version: Dominion code from CS362 Class Repo (exact version not available)
+
+Description:
+	When the adventurer card is played, the coin count is not updated for the current player. This happens
+	after running initializeGame with the following kingdom cards: smithy, adventurer, salvager, remodel, baron, 
+	great_hall, ambassador, tribute, outpost, minion, players set to 2, and seed set to 10. In card effect, the adventurer
+	card is played, with the three choice variables, handPos and bonus all set to 0. The previously initialized game state
+	is also passed to cardEffect.
+
+	By playing the adventuer card, the coin count is not updated by two. This is a problem because the adventurer card is supposed to 
+	add two treasure cards to a players hand. No error message pops up, and the game plays on normally with the wrong values.
+
+	The cause of the bug probably has to do with not updating the coin value using updateCoins in the adventurer function (updateCoins 
+	function not called). Look at adding a call to that function in the adventurer code.
+
+Steps to reproduce:
+	Run initializeGame with the input values listed above, and run cardEffect with the values listed above. Check the coins value
+	of the current player by running a print statement, and it will be less than it is supposed to be. The bug appears to be an error
+	with running the function updateCoin.
+
+Expected Result:
+	Coin count should be increased by at least 2. (should be at least 2)
+
+Actual Result: 
+	Coin count is increased by less than two. (stays at 0)
+
+Attachments:
+	See cardtest2, test #4 to reproduce the test and bug.

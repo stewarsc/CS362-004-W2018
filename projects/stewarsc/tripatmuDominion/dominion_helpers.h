@@ -11,11 +11,6 @@ int gainCard(int supplyPos, struct gameState *state, int toFlag, int player);
 int getCost(int cardNumber);
 int cardEffect(int card, int choice1, int choice2, int choice3, 
 	       struct gameState *state, int handPos, int *bonus);
-int callAdventurer(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int *temphand, int z);
-int callSmithy(int currentPlayer, struct gameState *state, int handPos);
-int callVillage(int currentPlayer, struct gameState *state, int handPos);
-int callGreatHall(int currentPlayer, struct gameState *state, int handPos);
-int callOutpost(int currentPlayer, struct gameState *state, int handPos);
-void printGameState(struct gameState *statek, int player);
 int assertTrue(char* name, int first, int second);
+void printGameState(struct gameState *statek, int player);
 #endif

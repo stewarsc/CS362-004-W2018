@@ -129,5 +129,26 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
    1, others to 0 */
 
 
+/*
+Define functions for five cards moved from switch statement of cardEffect function
+*/
+
+
+//Define function for Adventurer card
+int adventurerCard(struct gameState *state, int currentPlayer, int tempHand [], int drawntreasure, int z);
+
+//Define function for Council Room card
+int councilRoomCard(struct gameState *state, int currentPlayer, int handPos);
+
+//Define function for Smithy card
+int smithyCard(struct gameState *state, int currentPlayer, int handPos);
+
+
+//Define function for Village card
+int villageCard(struct gameState *state, int currentPlayer, int handPos);
+    
+
+//Define function for Great Hall card
+int greatHallCard(struct gameState *state, int currentPlayer, int handPos);
 
 #endif
